@@ -79,6 +79,16 @@ def get_uuid_from_submission(xml):
 
 def get_xform_from_submission(xml, username, uuid=None):
     # check alternative form submission ids
+    """
+    Gets an XForm from a submission's XML.
+
+    :param xml: submission XML
+    :param username: username of the user submitting the form
+    :param uuid: optional, the uuid of the form
+    :return: XForm object
+    :raises InstanceInvalidUserError: if no username and uuid provided
+    :raises NonUniqueFormIdError: if multiple XForms with the same id_string
+    """
     uuid = uuid or get_uuid_from_submission(xml)
 
     if not username and not uuid:

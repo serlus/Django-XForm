@@ -705,7 +705,8 @@ def get_form_url(
     https://example.com/[username]/formList. Same applies for preview if
     preview is True and also to a single form when xform_pk is provided.
     """
-    http_host = request.META.get('HTTP_HOST', 'dev.monitora.sisicmbio.icmbio.gov.br')
+    default_host = getattr(settings, 'XFORM_ENKETO_DEV_HTTP_HOST', 'localhost')
+    http_host = request.META.get('HTTP_HOST', default_host)
     url = '%s://%s' % (protocol, http_host)
     if preview:
         url = '%s/preview' % url
